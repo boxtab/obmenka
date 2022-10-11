@@ -1,0 +1,12 @@
+/*http://blog.adeel.io/2015/10/18/adding-an-asterisk-to-required-fields-in-bootstrap/*/
+
+/*.form-group.required .control-label:after {*/
+/*    content:"*";*/
+/*    color:red;*/
+/*}*/
+
+
+.control-label:after {
+    content:"*";
+    color:red;
+}

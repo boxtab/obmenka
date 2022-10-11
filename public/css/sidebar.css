@@ -1,0 +1,31 @@
+/* SIDEBAR */
+.sidebar > .sidebar-wrapper {
+    height: 100vh;
+}
+
+.sidebar > .sidebar-wrapper .version {
+    text-align: right;
+    padding: 6px 8px;
+    font-size: 12px;
+}
+
+@media (max-width: 991px) {
+    .sidebar .sidebar-wrapper {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+
+.sidebar .nav li:first-child > a {
+    /*margin: 0;*/
+}
+
+.sidebar .nav li a,
+.sidebar .nav li .dropdown-menu a {
+    margin: 0 15px;
+    padding: 0 10px;
+}
+
+.sidebar .sidebar-background {
+    display: none;
+}

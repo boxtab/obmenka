@@ -1,0 +1,274 @@
+docker-compose exec app php artisan make:migration create_currency_table
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan make:seeder CurrencySeeder
+docker-compose exec app php artisan db:seed --class=CurrencySeeder
+docker-compose exec app php artisan make:model Books/Currency
+docker-compose exec app php artisan make:controller Books/CurrencyController
+
+docker-compose exec app php artisan make:migration create_payment_system_table
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan make:seeder PaymentSystemSeeder
+docker-compose exec app php artisan db:seed --class=PaymentSystemSeeder
+docker-compose exec app php artisan make:model Books/PaymentSystem
+docker-compose exec app php artisan make:controller Books/PaymentSystemController
+
+docker-compose exec app php artisan make:migration create_exchange_direction_table
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan make:seeder ExchangeDirectionSeeder
+docker-compose exec app php artisan db:seed --class=ExchangeDirectionSeeder
+docker-compose exec app php artisan make:model Books/ExchangeDirection
+docker-compose exec app php artisan make:controller Books/ExchangeDirection
+
+docker-compose exec app php artisan list
+docker-compose exec app php artisan make:request StoreCurrency
+docker-compose exec app php artisan make:request StorePaymentSystem
+docker-compose exec app php artisan make:request StoreExchangeDirection
+
+docker-compose exec app php artisan make:migration create_box_table
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan make:model Books/Box
+docker-compose exec app php artisan make:controller Books/BoxController
+docker-compose exec app php artisan make:request StoreBox
+
+docker-compose exec app php artisan make:migration create_types_income_expense
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan make:model Books/TypesIncomeExpense
+docker-compose exec app php artisan make:request StoreTypesIncomeExpense
+docker-compose exec app php artisan make:controller Books/TypesIncomeExpenseController
+
+docker-compose exec app php artisan make:migration create_partners_table
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan make:model Books/Partners
+docker-compose exec app php artisan make:request StorePartners
+docker-compose exec app php artisan make:controller Books/PartnersController
+
+docker-compose exec app php artisan make:migration create_dds_table
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan make:model Books/DDS
+docker-compose exec app php artisan make:request StoreDDS
+docker-compose exec app php artisan make:controller Books/DDSController
+
+docker-compose exec app php artisan make:migration create_income_expense_table
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan make:model IncomeExpense
+docker-compose exec app php artisan make:request StoreIncomeExpense
+docker-compose exec app php artisan make:controller IncomeExpenseController
+
+docker-compose exec app php artisan make:migration create_bid_table
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan make:model Bid
+docker-compose exec app php artisan make:request StoreBid
+docker-compose exec app php artisan make:controller BidController
+
+docker-compose exec app php artisan make:migration add_column_deleted_at_on_box_table --table=box
+docker-compose exec app php artisan make:migration add_column_deleted_at_on_bid_table --table=bid
+docker-compose exec app php artisan make:migration add_column_deleted_at_on_currency_table --table=currency
+docker-compose exec app php artisan make:migration add_column_deleted_at_on_dds_table --table=dds
+docker-compose exec app php artisan make:migration add_column_deleted_at_on_exchange_direction_table --table=exchange_direction
+docker-compose exec app php artisan make:migration add_column_deleted_at_on_income_expense_table --table=income_expense
+docker-compose exec app php artisan make:migration add_column_deleted_at_on_partners_table --table=partners
+docker-compose exec app php artisan make:migration add_column_deleted_at_on_payment_system_table --table=payment_system
+docker-compose exec app php artisan make:migration add_column_deleted_at_on_payment_system_table --table=payment_system
+docker-compose exec app php artisan make:migration add_column_deleted_at_on_types_income_expense_table --table=types_income_expense
+docker-compose exec app php artisan make:migration add_column_deleted_at_on_users_table --table=users
+
+docker-compose exec app php artisan make:migration add_column_user_id_on_bid_table --table=bid
+docker-compose exec app php artisan make:migration add_column_user_id_on_box_table --table=box
+docker-compose exec app php artisan make:migration add_column_user_id_on_currency_table --table=currency
+docker-compose exec app php artisan make:migration add_column_user_id_on_dds_table --table=dds
+docker-compose exec app php artisan make:migration add_column_user_id_on_exchange_direction_table --table=exchange_direction
+docker-compose exec app php artisan make:migration add_column_user_id_on_income_expense_table --table=income_expense
+docker-compose exec app php artisan make:migration add_column_user_id_on_partners_table --table=partners
+docker-compose exec app php artisan make:migration add_column_user_id_on_payment_system_table --table=payment_system
+docker-compose exec app php artisan make:migration add_column_user_id_on_types_income_expense_table --table=types_income_expense
+
+docker-compose exec app php artisan make:controller AverageExchangeRates
+
+docker-compose exec app php artisan make:migration create_table_role --table=role
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan make:seeder RoleSeeder
+docker-compose exec app php artisan db:seed --class=RoleSeeder
+docker-compose exec app php artisan make:model Books/Role
+docker-compose exec app php artisan make:request StoreRole
+docker-compose exec app php artisan make:controller Books/RoleController
+
+docker-compose exec app php artisan make:migration add_column_fio_on_users_table --table=users
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan db:seed
+
+sudo chmod 777 composer.lock
+sudo chmod -R 777 vendor/
+docker-compose exec app composer require pragmarx/version
+docker-compose exec app php artisan vendor:publish --provider="PragmaRX\Version\Package\ServiceProvider"
+docker-compose exec app composer install
+docker-compose exec app composer update
+docker-compose exec app composer dump-autoload
+
+docker-compose exec app php artisan make:migration create_top_destinations_table
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan make:model Books/TopDestinations
+docker-compose exec app php artisan make:migration add_column_user_id_on_top_destinations_table --table=top_destinations
+docker-compose exec app php artisan make:request StoreTopDestinations
+docker-compose exec app php artisan make:controller Books/TopDestinationsController
+docker-compose exec app php artisan db:seed
+
+docker-compose exec app php artisan make:middleware CheckRole
+docker-compose exec app echo "" > storage/logs/laravel.log
+docker-compose exec app composer dump-autoload
+docker-compose exec app php artisan db:seed
+docker-compose exec app composer dump-autoload
+
+docker-compose exec app php artisan make:migration create_table_offer --table=offer
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan make:model Offer
+docker-compose exec app php artisan make:request StoreOffer
+docker-compose exec app php artisan make:migration drop_column_on_table_bid
+docker-compose exec app php artisan make:migration existing_field_to_nullable_on_table_offer
+docker-compose exec app composer require doctrine/dbal
+
+docker-compose exec app php artisan make:migration change_table_offer
+docker-compose exec app php artisan make:migration add_column_of_table_offer
+docker-compose exec app php artisan make:migration add_column_of_top_destinations_id_on_table_bid --table=bid
+
+docker-compose exec app php artisan make:migration create_view_v_exchange_direction;
+docker-compose exec app php artisan migrate:rollback --step=1
+docker-compose exec app php artisan make:migration create_view_v_users;
+
+docker-compose exec app php artisan make:migration create_table_box_balance --table=box_balance
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan migrate:rollback --step=1
+docker-compose exec app php artisan make:migration box_balance__add_columns --table=box_balance
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan make:model BoxBalance
+docker-compose exec app php artisan make:migration box_balance__add_column_user_id --table=box_balance
+docker-compose exec app php artisan make:controller BoxBalanceController
+docker-compose exec app php artisan make:request StoreBoxBalance
+
+docker-compose exec app php artisan make:migration box_balance__drop_column --table=box_balance
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan make:migration box_balance__add_column --table=box_balance
+docker-compose exec app php artisan make:migration box_balance__add_unique_key --table=box_balance
+
+docker-compose exec app php artisan make:migration bid__change_client_id --table=bid
+docker-compose exec app php artisan make:migration bid__add_client_id --table=bid
+docker-compose exec app php artisan make:migration bid__drop_direction_get_id --table=bid
+docker-compose exec app php artisan make:migration bid__add_direction_get_id --table=bid
+docker-compose exec app php artisan make:migration bid__drop_direction_give_id --table=bid
+docker-compose exec app php artisan make:migration bid__add_direction_give_id --table=bid
+docker-compose exec app php artisan make:migration bid__drop_bid_number --table=bid
+docker-compose exec app php artisan make:migration bid__add_bid_number --table=bid
+docker-compose exec app php artisan migrate:rollback --step=1
+docker-compose exec app php artisan make:migration bid__drop_second_employee --table=bid
+docker-compose exec app php artisan make:migration bid__add_manager_user_id --table=bid
+
+docker-compose exec app php artisan make:controller DirectionBalanceController
+docker-compose exec app php artisan make:model DirectionBalance
+docker-compose exec app php artisan make:migration clients__add_unique_key_fullname_email_phone --table=clients
+
+docker-compose exec app php artisan make:provider RepositoryServiceProvider
+
+docker-compose exec app composer dump-autoload
+docker-compose exec app php artisan make:request DuplicateBoxBalance
+
+docker-compose exec db mysql -V
+docker-compose exec db mysqldump -V
+docker-compose ps
+docker volume ls
+
+docker-compose exec app bash
+ls -lFa
+docker-compose db app bash
+ls -lFa
+docker-compose webserver app sh
+ls -lFa
+
+
+
+
+-- Создать дамп -------------------------------------------------------------------------------------------------------
+docker exec db /usr/bin/mysqldump -u root --password=123qwe+++ obmenka > backup_average_rate.sql
+
+-- Развернуть дамп -----------------------------------------------------------------------------------------------------
+cat /home/sasha/obmenka/backup_average_rate.sql | docker exec -i db /usr/bin/mysql -u root --password=123qwe+++ obmenka
+
+
+
+
+docker-compose exec app php artisan make:request UpdateBoxBalance
+
+-- Яджра --------------------------------------------------------------------------------------------
+docker-compose exec app composer dump-autoload
+docker-compose exec app composer update
+composer require yajra/laravel-datatables-oracle
+-- Яджра --------------------------------------------------------------------------------------------
+
+docker-compose exec app php artisan make:migration average_rate__table --table=average_rate
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan make:model AverageRate
+docker-compose exec app php artisan make:controller AverageRateController --resource
+docker-compose exec app php artisan make:migration average_rate__add_unique_index --table=average_rate
+
+docker-compose exec app php artisan make:migration currency__add_column_balance_rate
+docker-compose exec app php artisan make:controller InitialRateController --resource
+docker-compose exec app php artisan make:request UpdateCurrency
+
+
+docker-compose exec app php artisan make:migration income_expense__dds_id_nullable --table=income_expense
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan make:migration income_expense__add_column_partner_id --table=income_expense
+
+docker-compose exec app php artisan make:migration income_expense_type --table=income_expense_type
+docker-compose exec app php artisan make:seeder IncomeExpenseTypeSeeder
+docker-compose exec app php artisan make:model Books/IncomeExpenseType
+docker-compose exec app php artisan make:migration income_expense__add_column_income_expense_type --table=income_expense
+docker-compose exec app php artisan make:migration income_expense__add_column_income_id --table=income_expense
+docker-compose exec app php artisan migrate:rollback --step=1
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan make:migration income_expense__add_foreign_key_dds_id --table=income_expense
+docker-compose exec app php artisan make:migration income_expense__add_foreign_key_box_id --table=income_expense
+docker-compose exec app php artisan make:migration income_expense__field_note_nullable --table=income_expense
+docker-compose exec app php artisan make:migration income_expense__field_income_id_to_expense_id --table=income_expense
+
+docker-compose exec app php artisan make:migration income_expense__field_precision --table=income_expense
+docker-compose exec app php artisan make:migration offer__field_precision --table=income_offer
+
+docker-compose exec app php artisan version:show
+
+docker-compose exec app php artisan version:major
+docker-compose exec app php artisan version:minor
+docker-compose exec app php artisan version:patch
+docker-compose exec app php artisan version:commit
+docker-compose exec app php artisan version:absorb
+
+docker-compose exec app php artisan config:clear && php artisan cache:clear && php artisan config:cache
+
+docker-compose exec app php artisan config:clear
+docker-compose exec app php artisan cache:clear
+docker-compose exec app php artisan config:cache
+docker-compose exec app php artisan route:cache
+docker-compose exec app php artisan view:clear
+docker-compose exec app php artisan optimize:clear
+
+docker-compose exec app php artisan make:migration average_rate__rename_column_balance_amount_to_rate --table=average_rate
+
+-- DebugBar ------------------------------------------------------------------------------------------------------------
+docker-compose exec app composer dump-autoload
+docker-compose exec app composer update
+docker-compose exec app composer require barryvdh/laravel-debugbar
+docker-compose exec app php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
+------------------------------------------------------------------------------------------------------------------------
+
+docker-compose exec app echo "" > storage/logs/laravel-2021-06-09.log
+docker-compose exec app php artisan make:migration box__add_column_balance
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan make:controller InitialBoxController
+docker-compose exec app php artisan make:request UpdateInitialBoxBalance
+
+docker-compose exec app php artisan make:migration top_destinations_group__add_teh_column --table=top_destinations_group
+docker-compose exec app php artisan make:model Books/TopDestinationsGroupCross
+docker-compose exec app php artisan make:controller Books/TopDestinationsGroupController --resource
+docker-compose exec app php artisan make:request StoreTopDestinationsGroup
+docker-compose exec app php artisan make:controller Reports/ProfitSourceController
+docker-compose exec app php artisan make:migration top_destinations_group__add_month_year
+docker-compose exec app php artisan make:migration top_destinations_group__drop_unique_key_description
+docker-compose exec app php artisan make:migration top_destinations_group__description_month_year_unique_key
